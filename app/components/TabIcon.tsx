@@ -2,10 +2,10 @@ import {Image, ImageBackground, Text, View} from 'react-native'
 import React from 'react'
 import {images} from "@/constants/images";
 
-type TabIconProps = {
-    focused: boolean,
-    icon: string | any,
-    title: string,
+interface TabIconProps {
+    focused: boolean;
+    icon: string | any;
+    title: string;
 }
 
 const TabIcon = (
