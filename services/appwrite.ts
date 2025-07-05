@@ -31,6 +31,10 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
             )
         }
         else {
+            const posterUrl = movie.posterPath
+                ? `https://image.tmdb.org/t/p/w500${movie.posterPath}`
+                : 'https://placehold.co/200x300?text=No+Image';
+
             await database.createDocument(
                 DATABASE_ID,
                 COLLECTION_ID,
@@ -40,17 +44,17 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
                     movieId: movie.id,
                     count: 1,
                     title: movie.title,
-                    posterUrl: `https://image.tmdb.org/t/p/w500${movie.posterPath}`
+                    posterUrl: posterUrl
                 }
             )
         }
     }
-    catch (err : any) {
-        console.log(err)
+    catch (err: any) {
+        console.log("updateSearchCount error:", err)
         throw err;
-
     }
 }
+
 
 export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> => {
     try {
@@ -62,6 +66,7 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
                 Query.orderDesc('count')
             ]
         )
+        console.log(result.documents as unknown as TrendingMovie[]);
         return result.documents as unknown as TrendingMovie[];
     }
     catch (err) {

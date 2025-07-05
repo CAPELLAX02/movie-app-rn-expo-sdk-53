@@ -25,5 +25,20 @@ export const fetchMovies = async (
 
     const data = await response.json();
 
-    return data.results;
+    return data.results.map((movie: any) => ({
+        id: movie.id,
+        title: movie.title,
+        adult: movie.adult,
+        backdropPath: movie.backdrop_path,
+        genreIds: movie.genre_ids,
+        originalLanguage: movie.original_language,
+        originalTitle: movie.original_title,
+        overview: movie.overview,
+        popularity: movie.popularity,
+        posterPath: movie.poster_path,
+        releaseDate: movie.release_date,
+        video: movie.video,
+        voteAverage: movie.vote_average,
+        voteCount: movie.vote_count,
+    }));
 }

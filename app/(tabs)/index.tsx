@@ -7,6 +7,7 @@ import useFetch from "@/services/useFetch";
 import {fetchMovies} from "@/services/api";
 import MovieCard from "@/app/components/MovieCard";
 import {getTrendingMovies} from "@/services/appwrite";
+import TrendingCard from "@/app/components/TrendingCard";
 
 export default function Index() {
     const router = useRouter();
@@ -79,10 +80,8 @@ export default function Index() {
                                           ItemSeparatorComponent={() => <View className="w-4"/>}
                                           className="mb-4 mt-3"
                                           data={trendingMovies}
-                                          renderItem={({ item }) => (
-                                              <Text className="text-white text-sm">
-                                                  {item.title}
-                                              </Text>
+                                          renderItem={({ item, index }) => (
+                                              <TrendingCard movie={item} index={index} />
                                           )}
                                           keyExtractor={(item) => item.movieId.toString()}
                                       />
