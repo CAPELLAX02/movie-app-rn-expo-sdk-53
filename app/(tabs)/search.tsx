@@ -24,9 +24,6 @@ const Search = () => {
         const func = setTimeout(async () => {
             if (searchQuery.trim()) {
                 await refetchMovies();
-                if (movies?.length > 0 && movies?.[0]) {
-                    await updateSearchCount(searchQuery, movies[0])
-                }
             }
             else {
                 resetMovies();
@@ -34,6 +31,12 @@ const Search = () => {
         }, 500)
         return () => clearTimeout(func);
     }, [searchQuery]);
+
+    useEffect(() => {
+        if (movies?.length > 0 && movies?.[0]) {
+            updateSearchCount(searchQuery, movies[0])
+        }
+    }, [movies])
 
     return (
         <View className='flex-1 bg-primary'>
@@ -43,7 +46,7 @@ const Search = () => {
                 resizeMode='cover'
             />
             <FlatList
-                data={movies}
+                data={movies || []}
                 renderItem={({ item }) => <MovieCard { ...item } />}
                 keyExtractor={(item) => item.id.toString()}
                 className="px-5"
@@ -57,7 +60,7 @@ const Search = () => {
                     paddingBottom: 100
                 }}
                 ListHeaderComponent={
-                    <>
+                    <View>
                         <View className="w-full flex-row justify-center mt-20 items-center">
                             <Image
                                 source={icons.logo}
@@ -91,7 +94,7 @@ const Search = () => {
                         {!moviesLoading
                             && !moviesError
                             && searchQuery.trim()
-                            && movies.length > 0
+                            && (movies || []).length > 0
                             && (
                                 <Text className="text-xl text-white font-bold">
                                     Search Results for {''}
@@ -100,10 +103,10 @@ const Search = () => {
                                     </Text>
                                 </Text>
                             )}
-                    </>
+                    </View>
                 }
                 ListEmptyComponent={
-                    <>
+                    <View>
                         {!moviesLoading && !moviesError ? (
                             <View className="mt-10 px-5">
                                 <Text className="text-center text-gray-400">
@@ -114,7 +117,7 @@ const Search = () => {
                                 </Text>
                             </View>
                         ) : null}
-                    </>
+                    </View>
                 }
             />
         </View>
