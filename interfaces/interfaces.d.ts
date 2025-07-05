@@ -2,35 +2,35 @@ interface Movie {
   id: number;
   title: string;
   adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  original_language: string;
-  original_title: string;
+  backdropPath: string;
+  genreIds: number[];
+  originalLanguage: string;
+  originalTitle: string;
   overview: string;
   popularity: number;
-  poster_path: string;
-  release_date: string;
+  posterPath: string;
+  releaseDate: string;
   video: boolean;
-  vote_average: number;
-  vote_count: number;
+  voteAverage: number;
+  voteCount: number;
 }
 
 interface TrendingMovie {
   searchTerm: string;
-  movie_id: number;
+  movieId: number;
   title: string;
   count: number;
-  poster_url: string;
+  posterUrl: string;
 }
 
 interface MovieDetails {
   adult: boolean;
-  backdrop_path: string | null;
-  belongs_to_collection: {
+  backdropPath: string | null;
+  belongsToCollection: {
     id: number;
     name: string;
-    poster_path: string;
-    backdrop_path: string;
+    posterPath: string;
+    backdropPath: string;
   } | null;
   budget: number;
   genres: {
@@ -39,27 +39,27 @@ interface MovieDetails {
   }[];
   homepage: string | null;
   id: number;
-  imdb_id: string | null;
-  original_language: string;
-  original_title: string;
+  imdbId: string | null;
+  originalLanguage: string;
+  originalTitle: string;
   overview: string | null;
   popularity: number;
-  poster_path: string | null;
-  production_companies: {
+  posterPath: string | null;
+  productionCompanies: {
     id: number;
-    logo_path: string | null;
+    logoPath: string | null;
     name: string;
-    origin_country: string;
+    originCountry: string;
   }[];
-  production_countries: {
+  productionCountries: {
     iso_3166_1: string;
     name: string;
   }[];
-  release_date: string;
+  releaseDate: string;
   revenue: number;
   runtime: number | null;
-  spoken_languages: {
-    english_name: string;
+  spokenLanguages: {
+    englishName: string;
     iso_639_1: string;
     name: string;
   }[];
@@ -67,8 +67,8 @@ interface MovieDetails {
   tagline: string | null;
   title: string;
   video: boolean;
-  vote_average: number;
-  vote_count: number;
+  voteAverage: number;
+  voteCount: number;
 }
 
 interface TrendingCardProps {
